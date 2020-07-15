@@ -39,8 +39,8 @@ app.use(hpp());
 app.use(cors());
 
 //Mount routers
-app.use('/clientes', clients);
-app.use('/', users);
+app.use('/api/clientes', clients);
+app.use('/api', users);
 
 app.use(errorHandler);
 
