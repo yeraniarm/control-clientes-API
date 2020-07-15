@@ -4,8 +4,8 @@
   "description": "control-clientes backend API",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_ENV=production node server",
-    "dev": "nodemon server"
+    "START": "NODE_ENV=production node server",
+    "DEV": "nodemon server"
   },
   "author": "Yerania Rivera",
   "license": "ISC",
