@@ -3,6 +3,10 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
 const cors = require('cors');
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
+const xss = require('xss-clean');
+const hpp = require('hpp');
 
 // Load env vars
 dotenv.config({ path: './config/config.env' });
@@ -18,6 +22,18 @@ const app = express();
 
 //Body parser
 app.use(express.json());
+
+//Sanitize data
+app.use(mongoSanitize()); 
+
+//Set security headers
+app.use(helmet());
+
+//Prevent XSS attacks
+app.use(xss()); 
+
+//Prevent http param polution
+app.use(hpp());
 
 //Enable CORS
 app.use(cors());
