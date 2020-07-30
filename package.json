@@ -21,6 +21,7 @@
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.31",
     "mongoose": "^5.9.24",
+    "mongoose-auto-increment": "^5.0.1",
     "xss": "^1.0.7",
     "xss-clean": "^0.1.1"
   },

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const autoIncrement = require("mongoose-auto-increment");
 
 const ClientSchema = new mongoose.Schema({
     nombre: {
@@ -28,6 +29,21 @@ const ClientSchema = new mongoose.Schema({
             'Please add a valid email'
         ]    
     }
+});
+
+//Inicializar auto-incremento
+const connection = mongoose.createConnection(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+});
+autoIncrement.initialize(connection);
+  
+//Folio auto-incremental
+ClientSchema.plugin(autoIncrement.plugin, {
+    model: "Client",
+    field: "_id",
 });
 
 module.exports = mongoose.model('Client', ClientSchema);
