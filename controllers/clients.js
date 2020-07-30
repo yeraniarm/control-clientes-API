@@ -16,6 +16,7 @@ exports.getClients = asyncHandler(async(req,res,next) => {
 exports.addClient = asyncHandler(async(req,res,next) => {
     req.body.createdAt = moment().tz('America/Mexico_City').format('DD/MM/YYYY, hh:mm:ss a');
     let client = await Client.create(req.body);
+    console.log(client.correoxd);
     res.status(201).json({ success: true, data: client });
 });
 

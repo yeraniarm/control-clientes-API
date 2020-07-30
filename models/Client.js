@@ -16,7 +16,8 @@ const ClientSchema = new mongoose.Schema({
     createdAt: String, 
     telefono: {
         type: String, 
-        minlength: [10, 'Please add a valid number']
+        minlength: [10, 'Please add a valid number'], 
+        required: [true, 'Please add a number']
     }, 
     ciudad: String, 
     domicilio: String,
@@ -24,14 +25,16 @@ const ClientSchema = new mongoose.Schema({
     codigoPostal: String, 
     correo: {
         type: String,
+        required: [true, 'Please add an email'],
+        unique: true,
         match: [
             /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
             'Please add a valid email'
-        ]    
+        ] 
     }
 });
 
-//Inicializar auto-incremento
+//Initialize auto-increment
 const connection = mongoose.createConnection(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -40,10 +43,11 @@ const connection = mongoose.createConnection(process.env.MONGO_URI, {
 });
 autoIncrement.initialize(connection);
   
-//Folio auto-incremental
+//_id auto-incremental
 ClientSchema.plugin(autoIncrement.plugin, {
     model: "Client",
     field: "_id",
+    startAt: 1
 });
 
 module.exports = mongoose.model('Client', ClientSchema);
