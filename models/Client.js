@@ -47,7 +47,8 @@ autoIncrement.initialize(connection);
 ClientSchema.plugin(autoIncrement.plugin, {
     model: "Client",
     field: "_id",
-    startAt: 1
+    startAt: 1,
+    incrementBy: 1
 });
 
 module.exports = mongoose.model('Client', ClientSchema);
