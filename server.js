@@ -36,7 +36,7 @@ app.use(xss());
 app.use(hpp());
 
 //Enable CORS
-app.use(cors());
+app.use(cors({ origin: '*' }))
 
 //Mount routers
 app.use('/api/clientes', clients);
