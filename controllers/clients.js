@@ -10,6 +10,20 @@ exports.getClients = asyncHandler(async(req,res,next) => {
     res.status(200).json(res.advancedResults);
 });
 
+
+//@desc    Get client
+//@route   GET /clientes/:id
+//@access  Private
+exports.getClient = asyncHandler(async(req,res,next) => {
+    let client = await Client.findById(req.params.id);
+
+    if (!client) {
+        return next (new ErrorResponse(`Client not found with id of ${req.params.id}`, 404));
+    }
+
+    res.status(200).json({ success: true, data: client });
+});
+
 //@desc    Add client
 //@route   POST /clientes/crear
 //@access  Private
